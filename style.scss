@@ -1,0 +1,83 @@
+$widthDuck: 60px;
+$countDuck: 5;
+
+@for $i from 1 through $countDuck {
+    @keyframes duck-fly-#{$i} {
+        0% {
+            left: -$widthDuck;
+            top: random(90)+vh;
+        }
+
+        50% {
+            left: random(70)+vw;
+            top: random(90)+vh;
+        }
+
+        100% {
+            left: 100vw;
+            top: random(90)+vh;
+        }
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/Duck-Hunt1.webp');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    counter-reset: count;
+    position: relative;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1400px;
+    counter-reset: count; //создание счетчика с названием count
+
+}
+
+.duck-check {
+    position: absolute;
+    visibility: hidden;
+    left: -99999999px;
+
+    &:checked {
+        counter-increment: count; //увеличение счетчика, (когда нас чекбокс будет отмечен галочкой, то мы увеличиваем count на единицу)
+    }
+
+    &:checked ~ label {
+        display: none;
+    }
+}
+
+.counte-info {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+
+    &::before {
+        content: counter(count); //добавить результат подсчета нашего счетчика внутри блока h1
+    }
+}
+
+.duck {
+    position: absolute;
+    left: -$widthDuck;
+
+    @for $i from 1 through $countDuck {
+        &_#{$i} {
+            animation: duck-fly-#{$i} 5s ease-in #{$i}s both;
+        }
+    }
+
+    &__img {
+        width: $widthDuck;
+    }
+}
+
