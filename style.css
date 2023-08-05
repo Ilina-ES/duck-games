@@ -145,7 +145,7 @@
 }
 
 body {
-  background-image: url("./Duck-Hunt1.webp");
+  background-image: url("/Duck-Hunt1.webp");
   background-position: center;
   background-size: cover;
   height: 100vh;
